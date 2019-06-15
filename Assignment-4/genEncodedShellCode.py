@@ -3,7 +3,7 @@
 # Filename: genEncodedShellCode.py
 # Author: Jonathan So
 # Student ID: SLAE-1470
-# SLAE-Exercise 3
+# SLAE-Exercise 4
 
 import os
 
