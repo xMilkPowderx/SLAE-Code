@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-#Filename: bruteForceCrypter_Demo.c
+#Filename: converter.py
 #Author: Jonathan So
 #Student ID: SLAE-1470
 #SLAE-Exercise 7
